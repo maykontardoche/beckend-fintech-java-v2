@@ -62,6 +62,9 @@ public class ContaEntity extends BancoEntity{
 
     @Override
     public String toString() {
+        var saldo =  (this.saldo.compareTo(BigDecimal.ZERO) < 0)  ?  "Você está utilizando limite do cheque especial"
+                + this.saldo : this.saldo;
+
         return String.format(
                 "Titular: %s |Banco: %s | codigo: %s  | Agência: %s | Conta: %s | %s | Saldo: %s",
                 this.titular,
@@ -70,7 +73,7 @@ public class ContaEntity extends BancoEntity{
                 this.agencia,
                 this.conta,
                 (this.poupanca) ? "Conta Poupança" : "Conta Corrente",
-                this.saldo
+               saldo
         );
     }
 }

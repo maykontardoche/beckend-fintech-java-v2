@@ -3,8 +3,6 @@ package br.com.fintech.controller;
 import br.com.fintech.model.dto.ContaDTO;
 import br.com.fintech.model.service.ContaService;
 
-import java.math.BigDecimal;
-import java.util.List;
 
 public class ContaController {
     private final ContaService contaService;

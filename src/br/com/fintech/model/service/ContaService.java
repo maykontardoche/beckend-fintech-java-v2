@@ -26,9 +26,13 @@ public class ContaService {
         return contaRepository.findAll();
     }
 
-    public BigDecimal saldoConta(String cpf) {
+   public String saldoConta(String cpf) {
+        var conta = contaRepository.findByTitular(cpf);
         List<TransacaoEntity> transacoes = transacaoRepository.buscarPorConta(cpf);
-        return calcularSaldo(transacoes);
+        BigDecimal saldoInicial = conta.getSaldo();
+        var saldoFinal = saldoInicial.add(calcularSaldo(transacoes));
+        return String.format("Saldo da conta: %s", saldoFinal.compareTo(BigDecimal.ZERO) < 0 ?
+                saldoFinal + "  **Você está usando limite do cheque especial** " : saldoFinal);
     }
 
     public String incluirConta(ContaDTO contaDTO) {
@@ -38,9 +42,9 @@ public class ContaService {
                     " cadastre o cliente antes de registrar a conta.";
         }
         ContaEntity novaConta = new ContaEntity(
-                contaDTO.titular(),
                 contaDTO.codigo(),
                 contaDTO.instituicao(),
+                contaDTO.titular(),
                 contaDTO.agencia(),
                 contaDTO.conta(),
                 false,

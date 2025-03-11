@@ -36,16 +36,18 @@ public class Test {
 
         contaController.registrarConta(contaDTO);
 
-        TransacaoDTO transacaoDTO = new TransacaoDTO( BigDecimal.valueOf(1000.00), Date.valueOf("2025-10-01"),
-               "12345678900", "debito");
+        TransacaoDTO transacaoDTO = new TransacaoDTO( BigDecimal.valueOf(1500.00), Date.valueOf("2025-10-01"),
+              "12345678900", "debito");
 
-        transacaoController.registrarTransacao(transacaoDTO);
+       transacaoController.registrarTransacao(transacaoDTO);
 
         contaController.exibirSaldo("12345678900");
 
 
         TransacaoDTO transacaoDTO2 = new TransacaoDTO( BigDecimal.valueOf(1500.00), Date.valueOf("2025-10-01"),
                 "12345678900", "credito");
+
+        transacaoController.registrarTransacao(transacaoDTO2);
 
         contaController.consultarExtrato("12345678900");
 

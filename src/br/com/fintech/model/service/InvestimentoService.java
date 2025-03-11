@@ -38,13 +38,12 @@ public void adicionarInvestimento(InvestimentoDTO investimentoDTO) {
     );
 
     investimentoRepository.save(investimentoEntity);
-    System.out.println("Investimento adicionado com sucesso!");
+    System.out.println("Investimento adicionado com sucesso! " +investimentoEntity.toString());
 }
     public List<InvestimentoEntity> listarInvestimentoPorCliente(String titular) {
         return investimentoRepository.findByTitular(titular);
     }
 public void calcularInvestimento(UUID id, int meses) {
-    System.out.println("recebendo na service investimento" + id);
     InvestimentoEntity investimento = investimentoRepository.findAll().stream()
             .filter(inv -> inv.getId().equals(id))
             .findFirst()
